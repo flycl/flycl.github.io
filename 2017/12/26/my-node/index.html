@@ -1,48 +1,36 @@
-extends base
-
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span 条评论
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
-
-    include _partial/tag.pug
-    include _partial/post_nav.pug
-
-    if page.comments
-      include _partial/comments.pug
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>my node | Hexo</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/7.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">my node</h1><a id="logo" href="/.">Hexo</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">my node</h1><div class="post-meta">Dec 26, 2017</div><div class="post-content"><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>1. 工作
+    - 英语
+    - 学历
+    - Swift4.0
+    - Kotlin极简教程
+    - Node.js
+    - Vue
+    - MarkDown
+    -  
+2. 财务
+    - 产品
+    - 负债
+    - 营销
+3. 情感
+    - 等
+</code></pre><h2 id="OC"><a href="#OC" class="headerlink" title="OC"></a>OC</h2><h5 id="自动布局"><a href="#自动布局" class="headerlink" title="自动布局"></a>自动布局</h5><p><a href="https://www.jianshu.com/p/5da3d2fe5dee" target="_blank" rel="noopener">https://www.jianshu.com/p/5da3d2fe5dee</a><br>NSLayoutConstraint-代码实现自动布局</p>
+<h4 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h4><p><a href="https://github.com/vsouza/awesome-ios#about" target="_blank" rel="noopener">iOS开源项目 汇总</a></p>
+<p><a href="https://github.com/Coding/Coding-iPad" target="_blank" rel="noopener">coding for iPad</a></p>
+<p><a href="https://github.com/Coding/Coding-iOS" target="_blank" rel="noopener">coding iPhone</a></p>
+<p><a href="http://www.cnblogs.com/goodboy-heyang/p/5300457.html" target="_blank" rel="noopener">开源项目 Coding-iOS开源项目日志（一）  </a></p>
+<h5 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h5><p><a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a></p>
+<p><a href="https://www.jianshu.com/p/e0ff0ecd0f4b" target="_blank" rel="noopener">RAC 说明</a></p>
+<p><a href="http://lib.csdn.net/article/ios/42146" target="_blank" rel="noopener">编程模型 MVC MVVC MVP</a></p>
+<h5 id="carthage-使用-cocopods"><a href="#carthage-使用-cocopods" class="headerlink" title="carthage 使用 cocopods"></a>carthage 使用 cocopods</h5><p><a href="https://github.com/Carthage/Carthage" target="_blank" rel="noopener">Carthage</a></p>
+<p><a href="https://www.jianshu.com/p/bf263c596538" target="_blank" rel="noopener">Carthage使用心得-让自己的项目支持Carthage</a></p>
+<p><a href="https://www.jianshu.com/p/5ccde5f22a17" target="_blank" rel="noopener">如何使用Carthage管理iOS依赖库</a></p>
+<p><a href="https://github.com/libgit2/objective-git" target="_blank" rel="noopener">eg.</a></p>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
+<li>error: /Users/Kevin/开源项目/Coding-iOS-master/Coding_iOS/Resources/webview/app/build/bubble.html: No such file or directory </li>
+<li>failed to create provisioning profile. The app ID “net.coding.CodingForiOS”<br>改 ID</li>
+</ol>
+<h2 id="Node-JS-改用"><a href="#Node-JS-改用" class="headerlink" title="Node.JS 改用"></a>Node.JS 改用</h2><p>更新博文  陈磊.中国   改用 Node  参考 -&gt;&gt;<br><a href="https://hexo.io" target="_blank" rel="noopener">Node.JS 系统</a> </p>
+<p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
+<p><a href="http://gonghonglou.com" target="_blank" rel="noopener">更新Blog </a> </p>
+<h2 id="工作记录"><a href="#工作记录" class="headerlink" title="工作记录"></a>工作记录</h2><p><a href="https://www.jianshu.com/p/06c6530cff2d" target="_blank" rel="noopener">渐变导航条实现</a>  (根据ScrollView的滚动改变导航条透明度和颜色)</p>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/2017/12/26/hello-world/">Hello World</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/26/my-node/">my node</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/26/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">Hexo.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
