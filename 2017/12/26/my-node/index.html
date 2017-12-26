@@ -1,223 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+extends base
 
-  
-  <title>my node | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目录1. 工作     - 英语     - 学历     - Swift4.0     - Kotlin极简教程     - Node.js     - Vue     - MarkDown     -   2. 财务     - 产品     - 负债     - 营销 3. 情感     - 等 OC自动布局https://www.jianshu.com/p/5da3d2fe5deeNSLa">
-<meta property="og:type" content="article">
-<meta property="og:title" content="my node">
-<meta property="og:url" content="http://yoursite.com/2017/12/26/my-node/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="目录1. 工作     - 英语     - 学历     - Swift4.0     - Kotlin极简教程     - Node.js     - Vue     - MarkDown     -   2. 财务     - 产品     - 负债     - 营销 3. 情感     - 等 OC自动布局https://www.jianshu.com/p/5da3d2fe5deeNSLa">
-<meta property="og:updated_time" content="2017-12-26T02:26:33.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my node">
-<meta name="twitter:description" content="目录1. 工作     - 英语     - 学历     - Swift4.0     - Kotlin极简教程     - Node.js     - Vue     - MarkDown     -   2. 财务     - 产品     - 负债     - 营销 3. 情感     - 等 OC自动布局https://www.jianshu.com/p/5da3d2fe5deeNSLa">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  title= page.title + ' | ' + config.title
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-my-node" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/26/my-node/" class="article-date">
-  <time datetime="2017-12-26T02:25:26.000Z" itemprop="datePublished">2017-12-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      my node
-    </h1>
-  
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta= page.date.format('ll')
+      if page.categories.length > 0
+        span= ' | '
+        span.category
+          for category in page.categories.toArray()
+            a(href=url_for(category.path))= category.name
+      if theme.busuanzi == true
+        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
+        span#busuanzi_container_page_pv= ' | '
+          span#busuanzi_value_page_pv
+          span= ' ' + __('Hits')
+    if theme.disqus
+      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
+    if theme.changyan
+      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
+        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
+        span= ' ' + __('Comment')
+      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
+    if theme.valine.enable
+      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
+        span.valine-comment-count(data-xid=url_for(page.path))
+        span 条评论
+    if page.toc
+      div(class='clear')
+        div(id='toc' class='toc-article')
+          div(class='toc-title')= __('contents')
+          != toc(page.content, {list_number: theme.toc_number})
+    .post-content
+      != page.content
+    if theme.donate.enable == true
+      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
+    if theme.shareto == true
+      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
+      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>1. 工作
-    - 英语
-    - 学历
-    - Swift4.0
-    - Kotlin极简教程
-    - Node.js
-    - Vue
-    - MarkDown
-    -  
-2. 财务
-    - 产品
-    - 负债
-    - 营销
-3. 情感
-    - 等
-</code></pre><h2 id="OC"><a href="#OC" class="headerlink" title="OC"></a>OC</h2><h5 id="自动布局"><a href="#自动布局" class="headerlink" title="自动布局"></a>自动布局</h5><p><a href="https://www.jianshu.com/p/5da3d2fe5dee" target="_blank" rel="noopener">https://www.jianshu.com/p/5da3d2fe5dee</a><br>NSLayoutConstraint-代码实现自动布局</p>
-<h4 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h4><p><a href="https://github.com/vsouza/awesome-ios#about" target="_blank" rel="noopener">iOS开源项目 汇总</a></p>
-<p><a href="https://github.com/Coding/Coding-iPad" target="_blank" rel="noopener">coding for iPad</a></p>
-<p><a href="https://github.com/Coding/Coding-iOS" target="_blank" rel="noopener">coding iPhone</a></p>
-<p><a href="http://www.cnblogs.com/goodboy-heyang/p/5300457.html" target="_blank" rel="noopener">开源项目 Coding-iOS开源项目日志（一）  </a></p>
-<h5 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h5><p><a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="noopener">ReactiveCocoa</a></p>
-<p><a href="https://www.jianshu.com/p/e0ff0ecd0f4b" target="_blank" rel="noopener">RAC 说明</a></p>
-<p><a href="http://lib.csdn.net/article/ios/42146" target="_blank" rel="noopener">编程模型 MVC MVVC MVP</a></p>
-<h5 id="carthage-使用-cocopods"><a href="#carthage-使用-cocopods" class="headerlink" title="carthage 使用 cocopods"></a>carthage 使用 cocopods</h5><p><a href="https://github.com/Carthage/Carthage" target="_blank" rel="noopener">Carthage</a></p>
-<p><a href="https://www.jianshu.com/p/bf263c596538" target="_blank" rel="noopener">Carthage使用心得-让自己的项目支持Carthage</a></p>
-<p><a href="https://www.jianshu.com/p/5ccde5f22a17" target="_blank" rel="noopener">如何使用Carthage管理iOS依赖库</a></p>
-<p><a href="https://github.com/libgit2/objective-git" target="_blank" rel="noopener">eg.</a></p>
-<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
-<li>error: /Users/Kevin/开源项目/Coding-iOS-master/Coding_iOS/Resources/webview/app/build/bubble.html: No such file or directory </li>
-<li>failed to create provisioning profile. The app ID “net.coding.CodingForiOS”<br>改 ID</li>
-</ol>
-<h2 id="Node-JS-改用"><a href="#Node-JS-改用" class="headerlink" title="Node.JS 改用"></a>Node.JS 改用</h2><p>更新博文  陈磊.中国   改用 Node  参考 -&gt;&gt;<br><a href="https://hexo.io" target="_blank" rel="noopener">Node.JS 系统</a> </p>
-<p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
-<p><a href="http://gonghonglou.com" target="_blank" rel="noopener">更新Blog </a> </p>
-<h2 id="工作记录"><a href="#工作记录" class="headerlink" title="工作记录"></a>工作记录</h2><p><a href="https://www.jianshu.com/p/06c6530cff2d" target="_blank" rel="noopener">渐变导航条实现</a>  (根据ScrollView的滚动改变导航条透明度和颜色)</p>
+    include _partial/tag.pug
+    include _partial/post_nav.pug
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/my-node/" data-id="cjbn0ic4v0001l8irujxk5s29" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2017/12/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/12/26/my-node/">my node</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/26/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments
+      include _partial/comments.pug
